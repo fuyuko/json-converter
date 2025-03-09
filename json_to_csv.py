@@ -16,17 +16,7 @@ def json_to_csv(json_file_path, csv_file_path, kind_value):
         print(f"No items found with kind: {kind_value}")
         return
     
-    # Collect all keys from all items
-    keys = set()
-    for item in task_items:
-        keys.update(item.keys())
-    keys = list(keys)
-
-    # Ensure all items have the same keys
-    for item in task_items:
-        for key in keys:
-            if key not in item:
-                item[key] = None
+    keys = task_items[0].keys()
 
     with open(csv_file_path, 'w', newline='') as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=keys)
